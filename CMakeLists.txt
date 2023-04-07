@@ -1,18 +1,19 @@
 cmake_minimum_required(VERSION 3.13)
 
-set(CMAKE_C_COMPILER    "/opt/gcc-arm-none-eabi-x86_64-linux/bin/arm-none-eabi-gcc")
-set(CMAKE_CXX_COMPILER  "/opt/gcc-arm-none-eabi-x86_64-linux/bin/arm-none-eabi-g++")
-set(CMAKE_ASM_COMPILER  "/opt/gcc-arm-none-eabi-x86_64-linux/bin/arm-none-eabi-g++")
+set(CROSS_COMPILER      "/opt/gcc-arm-none-eabi-x86_64-linux/bin/arm-none-eabi-")
+set(CMAKE_C_COMPILER    "${CROSS_COMPILER}gcc")
+set(CMAKE_CXX_COMPILER  "${CROSS_COMPILER}g++")
+set(ASM_COMPILER        "${CROSS_COMPILER}g++")
+
+set(CMAKE_OBJSIZE       "${CROSS_COMPILER}size")
+set(CMAKE_OBJCOPY       "${CROSS_COMPILER}objcopy")
+set(CMAKE_OBJDUMP       "${CROSS_COMPILER}objdump")
 
 set(CMAKE_C_FLAGS
     "-Wall -fno-common -O0 -g -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 --specs=nosys.specs"
 )
-set(CMAKE_CXX_FLAGS
-    "-Wall -fno-common -O0 -g -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 --specs=nosys.specs"
-)
-set(CMAKE_ASM_FLAGS
-    "-Wall -fno-common -O0 -g -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 --specs=nosys.specs"
-)
+set(CMAKE_CXX_FLAGS ${CMAKE_C_FLAGS})
+set(CMAKE_ASM_FLAGS ${CMAKE_C_FLAGS})
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -T ${CMAKE_CURRENT_LIST_DIR}/libs/linker/STM32F429ZI_FLASH.ld")
 
 project(stm32-framework
