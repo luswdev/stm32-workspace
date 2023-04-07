@@ -15,7 +15,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build the Docker Image
+        shell: bash
         run: ./docker/build.sh
 
       - name: Test Build STM32 Flash Image
+        shell: bash
         run: ./docker/run.sh ./build.sh
