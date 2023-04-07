@@ -46,4 +46,6 @@ add_custom_command(
     TARGET ${PROJECT_NAME}.elf
     POST_BUILD
     COMMAND ${CMAKE_OBJCOPY} ARGS -Obinary ${PROJECT_NAME}.elf ${PROJECT_NAME}.bin
+    COMMAND ${CMAKE_OBJSIZE} ARGS ${PROJECT_NAME}.elf
+    COMMAND md5sum ARGS ${PROJECT_NAME}.bin
 )
