@@ -15,15 +15,14 @@ set(CMAKE_ASM_FLAGS
 )
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -T ${CMAKE_CURRENT_LIST_DIR}/libs/linker/STM32F429ZI_FLASH.ld")
 
-enable_language(ASM)
-
-project(stm32-framework)
+project(stm32-framework
+    LANGUAGES C ASM)
 
 aux_source_directory(${CMAKE_CURRENT_LIST_DIR}/app/src app)
 aux_source_directory(${CMAKE_CURRENT_LIST_DIR}/libs/CMSIS/src CMSIS)
 aux_source_directory(${CMAKE_CURRENT_LIST_DIR}/libs/STM32/src STM32)
 
-add_library(startup OBJECT ${CMAKE_CURRENT_LIST_DIR}/libs/startup/startup.s)
+add_library(startup OBJECT ${CMAKE_CURRENT_LIST_DIR}/libs/startup/startup.S)
 
 include_directories(
     ${CMAKE_CURRENT_LIST_DIR}/app/inc
