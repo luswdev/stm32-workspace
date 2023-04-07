@@ -15,9 +15,8 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Build the Docker Image
-        shell: bash
-        run: ./docker/build.sh
+        run: docker build --network=host -t stm32-workspace . -f docker/toolchain.dockerfile
 
       - name: Test Build STM32 Flash Image
-        shell: bash
-        run: ./docker/run.sh ./build.sh
+        run: docker run -v $(pwd):/opt/project -i --rm --hostname stm32-workspace --workdir /opt/project stm32-workspace:latest ./build.sh
+
