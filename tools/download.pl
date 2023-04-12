@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl
+#!/usr/bin/perl
 # NOTE: needs libnet-telnet-perl package.
 use Net::Telnet;
 use Cwd 'abs_path';
