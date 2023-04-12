@@ -23,8 +23,6 @@ aux_source_directory(${CMAKE_CURRENT_LIST_DIR}/app/src app)
 aux_source_directory(${CMAKE_CURRENT_LIST_DIR}/drivers/cmsis/src cmsis)
 aux_source_directory(${CMAKE_CURRENT_LIST_DIR}/drivers/stm32f4xx/src stm32f4xx)
 
-#add_library(startup OBJECT ${CMAKE_CURRENT_LIST_DIR}/drivers/startup/startup_stm32f429_439xx.s)
-
 include_directories(
     ${CMAKE_CURRENT_LIST_DIR}/app/inc
     ${CMAKE_CURRENT_LIST_DIR}/drivers/cmsis/inc
