@@ -8,6 +8,13 @@ RUN apt-get install -y \
     gcc \
     g++ \
     libssl-dev \
+    git \
+    perl \
+    cpanminus \
+    libtool \
+    autoconf \
+    automake \
+    pkgconf \
     bzip2
 
 ARG TOOLCHAIN_PLAT=x86_64-linux
@@ -32,3 +39,18 @@ RUN cd cmake-$CMAKE_VER && make install
 RUN rm -rf cmake.tar.gz cmake-$CMAKE_VER
 
 RUN cmake --version
+
+ARG OPENOCD_VER=v0.12.0
+
+RUN git clone https://git.code.sf.net/p/openocd/code openocd
+RUN cd openocd && git checkout $OPENOCD_VER
+
+RUN cd openocd && ./bootstrap
+RUN cd openocd && ./configure
+RUN cd openocd && make
+RUN cd openocd && make install
+
+RUN rm -rf openocd
+
+RUN cpanm install Net::Telnet
+RUN rm -fr root/.cpanm
