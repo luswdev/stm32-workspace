@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    main.h 
+  * @file    stm32f4xx_clock.h  
   * @author  MCD Application Team
-  * @version V1.0.0
-  * @date    20-September-2013
-  * @brief   Header for main.c module
+  * @version V1.0.1
+  * @date    11-November-2013
+  * @brief   Library configuration file.
   ******************************************************************************
   * @attention
   *
@@ -24,20 +24,47 @@
   *
   ******************************************************************************
   */
-  
+
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __MAIN_H
-#define __MAIN_H
+#ifndef __STM32F4xx_INIT_H
+#define __STM32F4xx_INIT_H
 
 /* Includes ------------------------------------------------------------------*/
+/* Uncomment the line below to enable peripheral header file inclusion */
 #include "stm32f4xx.h"
+#include "stm32f4xx_rcc.h"
 
 /* Exported types ------------------------------------------------------------*/
-/* Exported constants --------------------------------------------------------*/
-/* Exported macro ------------------------------------------------------------*/
-/* Exported functions ------------------------------------------------------- */
-void TimingDelay_Decrement(void);
+typedef enum 
+{
+  LED3 = 0,
+  LED4 = 1
+} Led_TypeDef;
 
-#endif /* __MAIN_H */
+typedef enum 
+{  
+  BUTTON_USER = 0,
+} Button_TypeDef;
+
+typedef enum 
+{  
+  BUTTON_MODE_GPIO = 0,
+  BUTTON_MODE_EXTI = 1
+} ButtonMode_TypeDef;
+
+/* Exported constants --------------------------------------------------------*/
+
+
+/* Exported macro ------------------------------------------------------------*/
+
+/* Exported functions ------------------------------------------------------- */
+void Delay_Init(void);
+void LED_Init(Led_TypeDef Led);
+
+void LED_Toggle(Led_TypeDef Led);
+void LED_On(Led_TypeDef Led);
+void LED_Off(Led_TypeDef Led);
+
+#endif /* __STM32F4xx_INIT_H */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

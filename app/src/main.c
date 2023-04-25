@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    Template/main.c 
+  * @file    main.c 
   * @author  MCD Application Team
   * @version V1.0.0
   * @date    20-September-2013
@@ -26,6 +26,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
+#include "stm32f4xx_init.h"
 #include "main.h"
 
 /** @addtogroup Template
@@ -36,10 +37,30 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+static __IO uint32_t TimingDelay;
+
 /* Private function prototypes -----------------------------------------------*/
 
 /* Private functions ---------------------------------------------------------*/
+void Delay(__IO uint32_t nTime)
+{ 
+  TimingDelay = nTime;
 
+  while(TimingDelay != 0);
+}
+
+/**
+  * @brief  Decrements the TimingDelay variable.
+  * @param  None
+  * @retval None
+  */
+void TimingDelay_Decrement(void)
+{
+  if (TimingDelay != 0)
+  { 
+    TimingDelay--;
+  }
+}
 /**
   * @brief   Main program
   * @param  None
@@ -55,10 +76,19 @@ int main(void)
      */  
   
   /* Add your application code here */
-    
+  Delay_Init();
+  LED_Init(LED3);
+  LED_Init(LED4);
+
+  LED_On(LED3);
+
   /* Infinite loop */
   while (1)
   {
+    LED_Toggle(LED3);
+    LED_Toggle(LED4);
+
+    Delay(50);
   }
 }
 
